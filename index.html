@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodieHub - Discover Great Food</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-utensils"></i>
+                <span>FoodieHub</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" onclick="showUserView()" class="nav-link active" id="user-nav">Browse Food</a>
+                <a href="#" onclick="showRestaurantView()" class="nav-link" id="restaurant-nav">Restaurant Dashboard</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User View -->
+    <div id="user-view" class="view active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Discover the best food & drinks</h1>
+                <p>Order from your favorite restaurants and get it delivered fresh</p>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for restaurants or dishes..." id="search-input">
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurants Grid -->
+        <section class="restaurants-section">
+            <div class="container">
+                <h2>Popular Restaurants</h2>
+                <div class="restaurants-grid" id="restaurants-grid">
+                    <!-- Restaurants will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Food Items Modal -->
+        <div class="modal" id="restaurant-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-restaurant-name"></h3>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="food-items-grid" id="food-items-grid">
+                        <!-- Food items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restaurant View -->
+    <div id="restaurant-view" class="view">
+        <div class="container">
+            <div class="restaurant-dashboard">
+                <h2>Restaurant Dashboard</h2>
+                <p>Manage your restaurant and food items</p>
+                
+                <!-- Restaurant Info Form -->
+                <div class="dashboard-section">
+                    <h3>Restaurant Information</h3>
+                    <form id="restaurant-form" class="form-grid">
+                        <div class="form-group">
+                            <label for="restaurant-name">Restaurant Name</label>
+                            <input type="text" id="restaurant-name" placeholder="Enter restaurant name">
+                        </div>
+                        <div class="form-group">
+                            <label for="restaurant-cuisine">Cuisine Type</label>
+                            <select id="restaurant-cuisine">
+                                <option value="">Select cuisine</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Mexican">Mexican</option>
+                                <option value="American">American</option>
+                                <option value="Thai">Thai</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="restaurant-rating">Rating</label>
+                            <select id="restaurant-rating">
+                                <option value="4.5">4.5 ⭐</option>
+                                <option value="4.2">4.2 ⭐</option>
+                                <option value="4.0">4.0 ⭐</option>
+                                <option value="3.8">3.8 ⭐</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="restaurant-image">Restaurant Image URL</label>
+                            <input type="url" id="restaurant-image" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Food Item Form -->
+                <div class="dashboard-section">
+                    <h3>Add Food Item</h3>
+                    <form id="food-form" class="form-grid">
+                        <div class="form-group">
+                            <label for="food-name">Food Name</label>
+                            <input type="text" id="food-name" placeholder="Enter food name">
+                        </div>
+                        <div class="form-group">
+                            <label for="food-price">Price (₹)</label>
+                            <input type="number" id="food-price" placeholder="299" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="food-category">Category</label>
+                            <select id="food-category">
+                                <option value="">Select category</option>
+                                <option value="Appetizers">Appetizers</option>
+                                <option value="Main Course">Main Course</option>
+                                <option value="Desserts">Desserts</option>
+                                <option value="Beverages">Beverages</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="food-image">Food Image URL</label>
+                            <input type="url" id="food-image" placeholder="https://example.com/food.jpg">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="food-description">Description</label>
+                            <textarea id="food-description" placeholder="Describe the food item..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-primary">Add Food Item</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Current Menu -->
+                <div class="dashboard-section">
+                    <h3>Current Menu</h3>
+                    <div class="menu-items" id="menu-items">
+                        <!-- Menu items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be populated by JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cart-total">0</span></strong>
+            </div>
+            <button class="btn-primary checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
